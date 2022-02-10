@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 public class CafeTest {
     public static void main(String[] args) {
         
