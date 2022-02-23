@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+.green{
+	color:green;
+}
+.blue{
+	color:blue;
+}
+.home{
+	display:flex;
+	width: fit-content;
+	margin: 50px auto;
+}
+.home h1{
+	padding: 25px;
+}
