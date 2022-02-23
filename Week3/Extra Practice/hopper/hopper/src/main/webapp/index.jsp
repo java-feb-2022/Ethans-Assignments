@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Simple Receipt</title>
 </head>
 <body>
 		<h1>Customer name: <c:out value="${name}"/></h1>
