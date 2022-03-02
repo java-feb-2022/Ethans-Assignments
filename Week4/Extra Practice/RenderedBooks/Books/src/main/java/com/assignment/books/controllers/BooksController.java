@@ -2,6 +2,7 @@ package com.assignment.books.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.assignment.books.models.Book;
@@ -16,10 +17,10 @@ public class BooksController {
 	}
 	@RequestMapping("/{id}")
 	public String show(Model model,@PathVariable("id") Long id) {
-		//This is a stand-in for now
-		Book newbook = new Book("Hungry Caterpillar", "A childrens book.", "English", 122);
-		bookService.createBook(newbook);
 		Book book = bookService.findBook(id);
+		if (book == null) {
+			return "redirect:/";
+		}
 		model.addAttribute("title", book.getTitle());
 		model.addAttribute("desc", book.getDesc());
 		model.addAttribute("lang", book.getLang());
@@ -28,6 +29,8 @@ public class BooksController {
 	}
 	@RequestMapping("/new")
 	public String newBook() {
+		Book newbook = new Book("Hungry Caterpillar", "A childrens book.", "English", 122);
+		bookService.createBook(newbook);
 		return "show.jsp";
 	}
 }

@@ -17,9 +17,9 @@ public class Controller {
     public Controller(BookService bookService){
         this.bookService = bookService;
     }
-    @RequestMapping("/api/books")
-    public List<Book> index() {
-        return bookService.allBooks();
+    @RequestMapping("/")
+    public String index() {
+        return "There is a book at id 30 for testing!";
     }
     
     @PostMapping("/api/books")
@@ -52,4 +52,5 @@ public class Controller {
     public void destroy(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
     }
+    
 }

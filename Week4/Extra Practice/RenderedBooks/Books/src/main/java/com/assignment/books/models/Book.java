@@ -65,6 +65,9 @@ public class Book {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+    public Long getId() {
+    	return this.id;
+    }
     public String getTitle() {
     	return this.title;
     }
