@@ -27,4 +27,8 @@ public class ExpenseService {
 			return null;
 		}
 	}
+	public Expense update(Expense E) {
+		E.update(E);
+		return expenseRepo.save(E);
+	}
 }

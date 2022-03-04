@@ -9,8 +9,12 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.company.savetravels.models.Expense;
 import com.company.savetravels.services.ExpenseService;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 @Controller
 public class expensesController {
 	private final ExpenseService expServ;
@@ -29,6 +33,20 @@ public class expensesController {
 			return "index.jsp";
 		}
 		expServ.createExpense(exp);
+		return "redirect:/home";
+	}
+	@GetMapping("/edit/{id}")
+	public String Edit(@PathVariable("id")Long id, Model model) {
+		Expense exp = expServ.findExpense(id);
+		model.addAttribute("expenses", exp);
+		return "edit.jsp";
+	}
+	@PostMapping("/processEdit")
+	public String update(@Valid @ModelAttribute("expenses") Expense exp, BindingResult result) {
+		if (result.hasErrors()) {
+			return "edit.jsp";
+		}
+		expServ.update(exp);
 		return "redirect:/home";
 	}
 }

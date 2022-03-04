@@ -1,42 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="style.css">
-<title>Expenses</title>
+<title>Edit</title>
 </head>
 <body>
-	<div class= table>
-	<h1>Save Travels</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Expense</th>
-				<th>Vendor</th>
-				<th>Amount</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="exp" items="${name}">
-			<tr>
-				<td>${exp.id}</td>
-				<td>${exp.name}</td>
-				<td>${exp.vendor}</td>
-				<td>${exp.amount}</td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	</div>
-	<div class= "form">
-	<h1>Add an expense</h1>
-	<form:form action="/new" method="post" modelAttribute="expenses">
+	<div class="form">
+	<form:form action="/processEdit" method="post" modelAttribute="expenses">
+	<input type="hidden" name="_method" value="put">
     <p>
         <form:label path="name">Name</form:label>
         <form:errors path="name" class="error"/>
@@ -58,7 +35,8 @@
         <form:textarea path="description"/>
     </p>    
     <input type="submit" value="Submit"/>
-   	</form:form>
-   	</div>
+    </form:form>
+    </div>
+    <a href="/home">Go back</a>
 </body>
 </html>

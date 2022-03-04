@@ -50,6 +50,12 @@ public class Expense {
 		this.amount = amount;
 		this.description = desc;
 	}
+	public void update(Expense E) {
+		this.name = E.getName();
+		this.vendor = E.getVendor();
+		this.amount = E.getAmount();
+		this.description = E.getDescription();
+	}
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
