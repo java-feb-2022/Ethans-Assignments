@@ -1,6 +1,7 @@
 package com.company.savetravels.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -9,13 +10,13 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.company.savetravels.models.Expense;
 import com.company.savetravels.services.ExpenseService;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 @Controller
+@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 public class expensesController {
 	private final ExpenseService expServ;
 	public expensesController(ExpenseService E) {
@@ -41,12 +42,15 @@ public class expensesController {
 		model.addAttribute("expenses", exp);
 		return "edit.jsp";
 	}
-	@PostMapping("/processEdit")
-	public String update(@Valid @ModelAttribute("expenses") Expense exp, BindingResult result) {
+	@PutMapping("/edit/{id}/process")
+	public String update(@Valid @ModelAttribute("expenses") Expense exp, BindingResult result, @PathVariable Long id, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute(exp);
 			return "edit.jsp";
 		}
-		expServ.update(exp);
+		Expense oldexp = expServ.findExpense(id);
+		oldexp.update(exp);
+		expServ.update(oldexp);
 		return "redirect:/home";
 	}
 }

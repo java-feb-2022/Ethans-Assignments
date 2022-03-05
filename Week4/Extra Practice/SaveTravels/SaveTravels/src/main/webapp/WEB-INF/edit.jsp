@@ -12,8 +12,8 @@
 </head>
 <body>
 	<div class="form">
-	<form:form action="/processEdit" method="post" modelAttribute="expenses">
-	<input type="hidden" name="_method" value="put">
+	<form:form action="/edit/${expenses.id}/process" method="PUT" modelAttribute="expenses">
+	<input type="hidden" name="_method">
     <p>
         <form:label path="name">Name</form:label>
         <form:errors path="name" class="error"/>
