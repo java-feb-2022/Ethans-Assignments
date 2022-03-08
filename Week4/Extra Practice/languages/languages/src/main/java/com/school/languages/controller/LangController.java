@@ -43,16 +43,16 @@ public class LangController {
 		return "view.jsp";
 	}
 	@GetMapping("/edit/{id}")
-	public String Edit(@PathVariable("id")Long id, Model model) {
+	public String Edit(@PathVariable("id")Long id, Model model, HttpSession Session) {
 		Language lang = langServ.findLanguage(id);
 		model.addAttribute("languages", lang);
+		Session.setAttribute("id", id);
 		return "edit.jsp";
 	}
-	@PutMapping("/edit/{id}/process")
-	public String update(@Valid @ModelAttribute("languages") Language lang, BindingResult result, @PathVariable Long id, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("languages", lang);
-			return "edit.jsp";
+	@PostMapping("/edit/{id}/process")
+	public String update(@Valid @ModelAttribute("languages") Language lang, BindingResult result, @PathVariable Long id,HttpSession Session) {
+		if(result.hasErrors()) {
+			return "redirect:/edit/"+id;
 		}
 		Language oldLang = langServ.findLanguage(id);
 		oldLang.update(lang);

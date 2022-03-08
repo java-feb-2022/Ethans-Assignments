@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,6 +28,7 @@ public class Language {
 	private String creator;
 	
 	@NotNull(message = "Please enter a version.")
+	@Min(value = 2, message = "Not a valid version")
 	private String version;
 	
 	@Column(updatable=false)

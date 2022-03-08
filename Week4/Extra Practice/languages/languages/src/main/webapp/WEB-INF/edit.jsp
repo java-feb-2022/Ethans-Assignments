@@ -12,8 +12,7 @@
 </head>
 <body>
 	<div class="form">
-	<form:form action="/edit/${languages.id}/process" method="PUT" modelAttribute="languages">
-	<input type="hidden" name="_method">
+	<form:form action="/edit/${languages.id}/process" method="POST" modelAttribute="languages">
     <p>
         <form:label path="name">Name</form:label>
         <form:errors path="name" class="error"/>
@@ -25,7 +24,7 @@
         <form:input path="creator"/>
     </p>
     <p>
-        <form:label path="version">amount</form:label>
+        <form:label path="version">version</form:label>
         <form:errors path="version" class="error"/>
         <form:input path="version"/>
     </p>
